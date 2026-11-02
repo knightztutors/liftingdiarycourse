@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+> **IMPORTANT — ALWAYS read the docs first.** Before generating or modifying ANY code, Claude must ALWAYS first consult the relevant documentation file in the `doc/` directory (e.g. `doc/ui.md` for UI work) and follow its guidance. This is not optional: every code change must begin by checking `doc/` for a file covering the area being touched. Never rely on prior assumptions when a `doc/` file applies.
+
 @AGENTS.md
 
 ## Commands

@@ -21,6 +21,25 @@ export async function listWorkouts() {
     .orderBy(desc(workoutsTable.performedOn));
 }
 
+// All workouts performed on a given date (YYYY-MM-DD), with their exercises
+// (ordered) and each exercise's sets — everything the dashboard needs to render.
+export async function listWorkoutsByDate(performedOn: string) {
+  const userId = await requireUserId();
+  return db.query.workoutsTable.findMany({
+    where: { userId, performedOn },
+    orderBy: { createdAt: "asc" },
+    with: {
+      workoutExercises: {
+        orderBy: { position: "asc" },
+        with: {
+          exercise: true,
+          sets: { orderBy: { setNumber: "asc" } },
+        },
+      },
+    },
+  });
+}
+
 // A single workout with its sets (and each set's exercise) via relational query.
 export async function getWorkout(id: number) {
   const userId = await requireUserId();
